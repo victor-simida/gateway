@@ -1,0 +1,71 @@
+{
+	"ImportPath": "violate",
+	"GoVersion": "go1.5",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/bom-d-van/goutil/printutils",
+			"Rev": "6f69c1a3bd948d2f74a5dfeebe712a5de83d15c1"
+		},
+		{
+			"ImportPath": "github.com/codegangsta/inject",
+			"Comment": "v1.0-rc1-10-g33e0aa1",
+			"Rev": "33e0aa1cb7c019ccc3fbe049a8262a6403d30504"
+		},
+		{
+			"ImportPath": "github.com/garyburd/redigo/internal",
+			"Rev": "836b6e58b3358112c8291565d01c35b8764070d7"
+		},
+		{
+			"ImportPath": "github.com/garyburd/redigo/redis",
+			"Rev": "836b6e58b3358112c8291565d01c35b8764070d7"
+		},
+		{
+			"ImportPath": "github.com/go-martini/martini",
+			"Comment": "v1.0-169-g15a4762",
+			"Rev": "15a47622d6a9b3e6a1eaca2681e4850f612471ea"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/configor",
+			"Rev": "f740b0b16fc10bacdb09fc3fbac9048aa827e952"
+		},
+		{
+			"ImportPath": "github.com/kobeld/goutils/martiniutil",
+			"Rev": "70d1b3e79a37f7565635231e4b0a9ed342b34727"
+		},
+		{
+			"ImportPath": "github.com/lixuanhao/fileLogger",
+			"Rev": "2f6214357c87146e912015f6843b86bbf16b19ac"
+		},
+		{
+			"ImportPath": "github.com/martini-contrib/cors",
+			"Rev": "553b9208d353a39b0850c02355f478ba020c86d7"
+		},
+		{
+			"ImportPath": "github.com/martini-contrib/gzip",
+			"Rev": "01cd70f560c841c6e52b9ba8f09748e18e35e2c4"
+		},
+		{
+			"ImportPath": "github.com/martini-contrib/render",
+			"Rev": "ec18f8345a1181146728238980606fb1d6f40e8c"
+		},
+		{
+			"ImportPath": "github.com/oxtoacart/bpool",
+			"Rev": "4e1c5567d7c2dd59fa4c7c83d34c2f3528b025d6"
+		},
+		{
+			"ImportPath": "golang.org/x/text/encoding",
+			"Rev": "e6847002810c51f892a128333573eac5e2a62024"
+		},
+		{
+			"ImportPath": "golang.org/x/text/transform",
+			"Rev": "e6847002810c51f892a128333573eac5e2a62024"
+		},
+		{
+			"ImportPath": "gopkg.in/yaml.v2",
+			"Rev": "eca94c41d994ae2215d455ce578ae6e2dc6ee516"
+		}
+	]
+}

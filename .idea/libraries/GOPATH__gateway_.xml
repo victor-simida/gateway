@@ -1,0 +1,75 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;gateway&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../go_test/src/go_test" />
+      <root url="file://$PROJECT_DIR$/../golang.org" />
+      <root url="file://$PROJECT_DIR$/../greenInsurance.zip" />
+      <root url="file://$PROJECT_DIR$/../greenInsurance" />
+      <root url="file://$PROJECT_DIR$/../violate - 副本" />
+      <root url="file://$PROJECT_DIR$/../violate.zip" />
+      <root url="file://$PROJECT_DIR$/../gateway.zip" />
+      <root url="file://$PROJECT_DIR$/../dmz-server" />
+      <root url="file://$PROJECT_DIR$/../auth" />
+      <root url="file://$PROJECT_DIR$/../violate" />
+      <root url="file://$PROJECT_DIR$/../pingan.com.cn" />
+      <root url="file://$PROJECT_DIR$/../claimer" />
+      <root url="file://$PROJECT_DIR$/../gateway" />
+      <root url="file://$PROJECT_DIR$/../violate_test" />
+      <root url="file://$PROJECT_DIR$/../server" />
+      <root url="file://$PROJECT_DIR$/../github.com" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+      <root url="file://$PROJECT_DIR$/../violate/Godeps/_workspace" />
+      <root url="file://$PROJECT_DIR$/../gateway/.git" />
+      <root url="file://$PROJECT_DIR$/../golang.org/x/text/encoding/testdata" />
+      <root url="file://$PROJECT_DIR$/../github.com/fatih/camelcase/.git" />
+      <root url="file://$PROJECT_DIR$/../violate/.git" />
+      <root url="file://$PROJECT_DIR$/../auth/.idea" />
+      <root url="file://$PROJECT_DIR$/../gateway/.idea" />
+      <root url="file://$PROJECT_DIR$/../github.com/martini-contrib/cors/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/fatih/structs/.git" />
+      <root url="file://$PROJECT_DIR$/../auth/.git" />
+      <root url="file://$PROJECT_DIR$/../gateway/Godeps/_workspace" />
+      <root url="file://$PROJECT_DIR$/../greenInsurance/_configfile" />
+      <root url="file://$PROJECT_DIR$/../github.com/go-martini/martini/.git" />
+      <root url="file://$PROJECT_DIR$/../claimer/.git" />
+      <root url="file://$PROJECT_DIR$/../claimer/.idea" />
+      <root url="file://$PROJECT_DIR$/../greenInsurance/.git" />
+      <root url="file://$PROJECT_DIR$/../greenInsurance/.idea" />
+      <root url="file://$PROJECT_DIR$/../dmz-server/.git" />
+      <root url="file://$PROJECT_DIR$/../greenInsurance/Godeps/_workspace" />
+      <root url="file://$PROJECT_DIR$/../../../go_test/src/go_test/Godeps/_workspace" />
+      <root url="file://$PROJECT_DIR$/../github.com/codegangsta/inject/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/martini-contrib/binding/.git" />
+      <root url="file://$PROJECT_DIR$/../dmz-server/Godeps/_workspace" />
+      <root url="file://$PROJECT_DIR$/../auth/Godeps/_workspace" />
+      <root url="file://$PROJECT_DIR$/../violate - 副本/Godeps/_workspace" />
+      <root url="file://$PROJECT_DIR$/../dmz-server/.idea" />
+      <root url="file://$PROJECT_DIR$/../github.com/martini-contrib/render/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/BurntSushi/toml/_examples" />
+      <root url="file://$PROJECT_DIR$/../github.com/BurntSushi/toml/.git" />
+      <root url="file://$PROJECT_DIR$/../golang.org/x/text/.git" />
+      <root url="file://$PROJECT_DIR$/../../../go_test/src/go_test/.idea" />
+      <root url="file://$PROJECT_DIR$/../violate - 副本/.idea" />
+      <root url="file://$PROJECT_DIR$/../violate/.idea" />
+      <root url="file://$PROJECT_DIR$/../violate - 副本/_H5" />
+      <root url="file://$PROJECT_DIR$/../violate - 副本/.git" />
+      <root url="file://$PROJECT_DIR$/../violate/_H5" />
+      <root url="file://$PROJECT_DIR$/../github.com/oxtoacart/bpool/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/garyburd/redigo/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/bom-d-van/goutil/.git" />
+      <root url="file://$PROJECT_DIR$/../pingan.com.cn/garage/.git" />
+      <root url="file://$PROJECT_DIR$/../pingan.com.cn/garage/.idea" />
+      <root url="file://$PROJECT_DIR$/../claimer/Godeps/_workspace" />
+      <root url="file://$PROJECT_DIR$/../github.com/qiniu/iconv/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/xushiwei/go-iconv/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/koding/multiconfig/testdata" />
+      <root url="file://$PROJECT_DIR$/../pingan.com.cn/garage/Godeps/_workspace" />
+      <root url="file://$PROJECT_DIR$/../github.com/koding/multiconfig/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/djimenez/iconv-go/.git" />
+    </excluded>
+  </library>
+</component>

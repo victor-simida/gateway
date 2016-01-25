@@ -1,0 +1,15 @@
+http_addr: 
+    - suffix: "123123123123"
+      prefix: ""
+      method: "POST"
+    - suffix: "123123123123"
+      prefix: ""
+      method: "POST"
+https_addr: 
+    - suffix: "123123123123"
+      prefix: ""
+      method: "POST"
+    - suffix: "123123123123"
+      prefix: ""
+      method: "POST"
+server_port: "5001"
