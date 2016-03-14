@@ -1,0 +1,6 @@
+gateway.exe
+.idea
+logs
+Godeps
+gateway.iml
+*.xml

@@ -3,6 +3,7 @@ package web
 import (
 	"gateway/Godeps/_workspace/src/github.com/go-martini/martini"
 	"gateway/config"
+	"net/http"
 )
 
 type regInfo struct {
@@ -18,8 +19,14 @@ func RegisterHandler(method, uri string, handler ...martini.Handler) {
 	_RegInfo = append(_RegInfo, info)
 }
 
+func delRealIp (req *http.Request) {
+	req.Header.Del("X-Real-Ip")
+	req.Header.Del("X-Forwarded-For")
+}
+
 func RunMartini() {
 	m := martini.Classic()
+	m.Use(delRealIp)
 
 	for _, info := range _RegInfo {
 		switch info.Method {
