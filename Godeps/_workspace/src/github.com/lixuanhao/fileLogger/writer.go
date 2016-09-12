@@ -17,7 +17,7 @@ const (
 )
 
 // Receive logStr from f's logChan and print logstr to file
-func (f *FileLogger) logWriter() {
+func (f *FileLogger) 	logWriter() {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Printf("FileLogger's LogWritter() catch panic: %v\n", err)

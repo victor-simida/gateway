@@ -44,10 +44,6 @@
 			"Rev": "553b9208d353a39b0850c02355f478ba020c86d7"
 		},
 		{
-			"ImportPath": "github.com/martini-contrib/gzip",
-			"Rev": "01cd70f560c841c6e52b9ba8f09748e18e35e2c4"
-		},
-		{
 			"ImportPath": "github.com/martini-contrib/render",
 			"Rev": "ec18f8345a1181146728238980606fb1d6f40e8c"
 		},
