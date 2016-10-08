@@ -3,7 +3,7 @@ package martini
 import (
 	"net/http"
 	"reflect"
-	"violate/Godeps/_workspace/src/github.com/codegangsta/inject"
+	"gateway/Godeps/_workspace/src/github.com/codegangsta/inject"
 )
 
 // ReturnHandler is a service that Martini provides that is called

@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"strings"
 
-	"violate/Godeps/_workspace/src/github.com/go-martini/martini"
+	"gateway/Godeps/_workspace/src/github.com/go-martini/martini"
 )
 
 const (

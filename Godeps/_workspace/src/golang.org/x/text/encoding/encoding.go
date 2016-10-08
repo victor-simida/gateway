@@ -20,7 +20,7 @@ import (
 	"errors"
 	"unicode/utf8"
 
-	"violate/Godeps/_workspace/src/golang.org/x/text/transform"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/transform"
 )
 
 // Encoding is a character set encoding that can be transformed to and from

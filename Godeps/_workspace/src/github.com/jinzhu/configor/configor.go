@@ -11,7 +11,7 @@ import (
 	"regexp"
 	"strings"
 
-	"violate/Godeps/_workspace/src/gopkg.in/yaml.v2"
+	"gateway/Godeps/_workspace/src/gopkg.in/yaml.v2"
 )
 
 // ENV will return environment

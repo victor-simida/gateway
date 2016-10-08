@@ -5,15 +5,15 @@
 package htmlindex
 
 import (
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding"
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding/charmap"
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding/internal"
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding/internal/identifier"
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding/japanese"
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding/korean"
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding/simplifiedchinese"
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding/traditionalchinese"
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding/unicode"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding/charmap"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding/internal"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding/internal/identifier"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding/japanese"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding/korean"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding/simplifiedchinese"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding/traditionalchinese"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding/unicode"
 )
 
 // mibMap maps a MIB identifier to an htmlEncoding index.

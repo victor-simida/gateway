@@ -2,6 +2,7 @@ package web
 
 import (
 	"gateway/Godeps/_workspace/src/github.com/go-martini/martini"
+	"gateway/Godeps/_workspace/src/github.com/martini-contrib/gzip"
 	"gateway/config"
 	"net/http"
 )
@@ -26,7 +27,7 @@ func delRealIp (req *http.Request) {
 func  RunMartini() {
 	m := martini.Classic()
 	m.Use(delRealIp)
-	/*post和get方法都要监听*/
+	m.Use(gzip.All())
 	for _, info := range _RegInfo {
 		m.Get(info.Uri, info.Handler...)
 		m.Post(info.Uri, info.Handler...)

@@ -48,9 +48,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"violate/Godeps/_workspace/src/github.com/oxtoacart/bpool"
+	"gateway/Godeps/_workspace/src/github.com/oxtoacart/bpool"
 
-	"violate/Godeps/_workspace/src/github.com/go-martini/martini"
+	"gateway/Godeps/_workspace/src/github.com/go-martini/martini"
 )
 
 const (

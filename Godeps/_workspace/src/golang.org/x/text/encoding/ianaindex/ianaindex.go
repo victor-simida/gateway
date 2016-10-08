@@ -10,7 +10,7 @@
 package ianaindex
 
 import (
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding"
 )
 
 // TODO: allow users to specify their own aliases?

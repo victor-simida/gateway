@@ -5,7 +5,7 @@
 package japanese
 
 import (
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding"
 )
 
 // All is a list of all defined encodings in this package.

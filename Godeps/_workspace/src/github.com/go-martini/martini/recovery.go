@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"runtime"
 
-	"violate/Godeps/_workspace/src/github.com/codegangsta/inject"
+	"gateway/Godeps/_workspace/src/github.com/codegangsta/inject"
 )
 
 const (

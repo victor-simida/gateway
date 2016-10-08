@@ -10,9 +10,9 @@ import (
 	"unicode/utf16"
 	"unicode/utf8"
 
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding"
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding/internal/identifier"
-	"violate/Godeps/_workspace/src/golang.org/x/text/transform"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding/internal/identifier"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/transform"
 )
 
 // TODO: I think the Transformers really should return errors on unmatched

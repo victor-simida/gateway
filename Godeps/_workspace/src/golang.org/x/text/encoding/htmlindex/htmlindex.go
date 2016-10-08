@@ -27,8 +27,8 @@ import (
 	"sync"
 
 	"golang.org/x/text/language"
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding"
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding/internal/identifier"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding/internal/identifier"
 )
 
 var (

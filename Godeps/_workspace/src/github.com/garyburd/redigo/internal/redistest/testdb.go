@@ -19,7 +19,7 @@ import (
 	"errors"
 	"time"
 
-	"violate/Godeps/_workspace/src/github.com/garyburd/redigo/redis"
+	"gateway/Godeps/_workspace/src/github.com/garyburd/redigo/redis"
 )
 
 type testConn struct {

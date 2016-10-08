@@ -8,10 +8,10 @@ import (
 	"errors"
 	"unicode/utf8"
 
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding"
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding/internal"
-	"violate/Godeps/_workspace/src/golang.org/x/text/encoding/internal/identifier"
-	"violate/Godeps/_workspace/src/golang.org/x/text/transform"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding/internal"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/encoding/internal/identifier"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/transform"
 )
 
 // HZGB2312 is the HZ-GB2312 encoding.

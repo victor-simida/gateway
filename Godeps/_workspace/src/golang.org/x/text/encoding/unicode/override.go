@@ -5,7 +5,7 @@
 package unicode
 
 import (
-	"violate/Godeps/_workspace/src/golang.org/x/text/transform"
+	"gateway/Godeps/_workspace/src/golang.org/x/text/transform"
 )
 
 // BOMOverride returns a new decoder transformer that is identical to fallback,

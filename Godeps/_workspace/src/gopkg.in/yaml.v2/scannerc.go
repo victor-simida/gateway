@@ -2658,7 +2658,7 @@ func yaml_parser_scan_plain_scalar(parser *yaml_parser_t, token *yaml_token_t) b
 				// Check for tab character that abuse intendation.
 				if leading_blanks && parser.mark.column < indent && is_tab(parser.buffer, parser.buffer_pos) {
 					yaml_parser_set_scanner_error(parser, "while scanning a plain scalar",
-						start_mark, "found a tab character that violate intendation")
+						start_mark, "found a tab character that gateway intendation")
 					return false
 				}
 
