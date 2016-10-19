@@ -24,6 +24,9 @@ import (
 	"reflect"
 
 	"gateway/Godeps/_workspace/src/github.com/codegangsta/inject"
+	"net"
+	"sync"
+	"time"
 )
 
 // Martini represents the top level web application. inject.Injector methods can be invoked to map services on a global level.
@@ -32,11 +35,28 @@ type Martini struct {
 	handlers []Handler
 	action   Handler
 	logger   *log.Logger
+	server   MartiniServer
 }
+
+type connectState struct {
+	conn  net.Conn
+	state http.ConnState
+}
+
+type MartiniServer struct {
+	l            net.Listener
+	stateMap     map[net.Conn]http.ConnState
+	stateChannel chan connectState
+	connsLock    sync.Locker
+}
+
 
 // New creates a bare bones Martini instance. Use this method if you want to have full control over the middleware that is used.
 func New() *Martini {
 	m := &Martini{Injector: inject.New(), action: func() {}, logger: log.New(os.Stdout, "[martini] ", 0)}
+	m.server.stateMap = make(map[net.Conn]http.ConnState)
+	m.server.stateChannel = make(chan connectState, 9192)
+
 	m.Map(m.logger)
 	m.Map(defaultReturnHandler())
 	return m
@@ -77,7 +97,32 @@ func (m *Martini) RunOnAddr(addr string) {
 
 	logger := m.Injector.Get(reflect.TypeOf(m.logger)).Interface().(*log.Logger)
 	logger.Printf("listening on %s (%s)\n", addr, Env)
-	logger.Fatalln(http.ListenAndServe(addr, m))
+	l, err := net.Listen("tcp", addr)
+	if err != nil {
+		logger.Fatalln(err.Error())
+		return
+	}
+	var server http.Server
+	server.Handler = m
+	server.ConnState = m.connectStateChange
+	m.server.l = l
+
+	go func() {
+		channel := m.server.stateChannel
+		for input := range channel {
+			switch input.state {
+			case http.StateNew, http.StateActive, http.StateIdle:
+				m.server.connsLock.Lock()
+				m.server.stateMap[input.conn] = input.state
+				m.server.connsLock.Unlock()
+			case http.StateHijacked, http.StateClosed:
+				m.server.connsLock.Lock()
+				delete(m.server.stateMap, input.conn)
+				m.server.connsLock.Unlock()
+			}
+		}
+	}()
+	server.Serve(l)
 }
 
 // Run the http server. Listening on os.GetEnv("PORT") or 3000 by default.
@@ -101,6 +146,47 @@ func (m *Martini) createContext(res http.ResponseWriter, req *http.Request) *con
 	return c
 }
 
+func (m *Martini)closeIdleConn() {
+	m.server.connsLock.Lock()
+	for k, v := range m.server.stateMap {
+		if v == http.StateIdle {
+			delete(m.server.stateMap, k)
+		}
+	}
+	m.server.connsLock.Unlock()
+}
+
+func (m *Martini) Close() {
+	if m.server.l != nil {
+		m.server.l.Close()
+		m.server.l = nil
+	}
+	for {
+		length := len(m.server.stateMap)
+		if length == 0 {
+			break
+		}
+		m.closeIdleConn()
+		time.Sleep(500 * time.Millisecond)
+	}
+
+	if m.server.stateChannel != nil {
+		close(m.server.stateChannel)
+		m.server.stateChannel = nil
+	}
+
+}
+
+func (m *Martini)connectStateChange(conn net.Conn, state http.ConnState) {
+	var input connectState = connectState{conn:conn, state:state}
+	select {
+	case m.server.stateChannel <- input:
+	default:
+		logger := m.Injector.Get(reflect.TypeOf(m.logger)).Interface().(*log.Logger)
+		logger.Printf("stateChannel full\n")
+	}
+}
+
 // ClassicMartini represents a Martini with some reasonable defaults. Embeds the router functions for convenience.
 type ClassicMartini struct {
 	*Martini
@@ -109,15 +195,15 @@ type ClassicMartini struct {
 
 // Classic creates a classic Martini with some basic default middleware - martini.Logger, martini.Recovery and martini.Static.
 // Classic also maps martini.Routes as a service.
-func  Classic() *ClassicMartini {
+func Classic() *ClassicMartini {
 	r := NewRouter()
-m := New()
-m.Use(Logger())
-m.Use(Recovery())
-m.Use(Static("public"))
-m.MapTo(r, (*Routes)(nil))
-m.Action(r.Handle)
-return &ClassicMartini{m, r}
+	m := New()
+	m.Use(Logger())
+	m.Use(Recovery())
+	m.Use(Static("public"))
+	m.MapTo(r, (*Routes)(nil))
+	m.Action(r.Handle)
+	return &ClassicMartini{m, r}
 }
 
 // Handler can be any callable function. Martini attempts to inject services into the handler's argument list.
@@ -181,3 +267,4 @@ func (c *context) run() {
 		}
 	}
 }
+

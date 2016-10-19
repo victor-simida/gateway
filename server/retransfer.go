@@ -11,7 +11,18 @@ import (
 	"crypto/tls"
 )
 
+var httpClient *http.Client
+var httpsClient *http.Client
 func init() {
+	httpClient = http.DefaultClient
+	httpsClient = http.DefaultClient
+
+	/*https默认不校验tls*/
+	tr := &http.Transport{
+		TLSClientConfig:    &tls.Config{InsecureSkipVerify: true},
+	}
+	httpsClient.Transport = tr
+
 	for _, v := range config.Settings.HttpAddr {
 		url := fmt.Sprintf("/gateway/%s", v.Suffix)
 		mylog.LOG.I("Http retransfer %s", url)
@@ -222,24 +233,19 @@ func TransToHttps(urlStr string, req *http.Request, host string) ([]byte, int, e
 	}
 	new_req.RequestURI = ""            //RequestURI需要设置为空，否则会报错
 
-	/*https默认不校验tls*/
-	tr := &http.Transport{
-		TLSClientConfig:    &tls.Config{InsecureSkipVerify: true},
-	}
-	client := &http.Client{Transport:tr}
 
 	mylog.LOG.I("TransToHttps New Req:%+v", *new_req)
-	resp, err := client.Do(new_req)
+	resp, err := httpsClient.Do(new_req)
 	if err != nil {
 		mylog.LOG.E("client do error:%s", err.Error())
-		return []byte{}, http.StatusNotFound, err
+		return []byte{}, resp.StatusCode, err
 	}
 
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		mylog.LOG.E("ioutil.ReadAll error:%s", err.Error())
-		return []byte{}, http.StatusNotFound, err
+		return []byte{}, resp.StatusCode, err
 	}
 	mylog.LOG.I("Return response:%s %v", string(body), resp.StatusCode)
 	return body, resp.StatusCode, nil
@@ -269,20 +275,19 @@ func TransToHttp(urlStr string, req *http.Request, host string) ([]byte, int, er
 		new_req.Host = u.Host
 	}
 	new_req.RequestURI = ""            //RequestURI需要设置为空，否则会报错
-	client := &http.Client{}
 
 	mylog.LOG.I("TransToHttp New Req:%+v", new_req.Header)
-	resp, err := client.Do(new_req)
+	resp, err := httpClient.Do(new_req)
 	if err != nil {
 		mylog.LOG.E("client do error:%s", err.Error())
-		return []byte{}, http.StatusNotFound, err
+		return []byte{}, resp.StatusCode, err
 	}
 
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		mylog.LOG.E("ioutil.ReadAll error:%s", err.Error())
-		return []byte{}, http.StatusNotFound, err
+		return []byte{}, resp.StatusCode, err
 	}
 	mylog.LOG.I("Return response:%s %v", string(body), resp.StatusCode)
 	return body, resp.StatusCode, nil
