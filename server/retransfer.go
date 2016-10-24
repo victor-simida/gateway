@@ -238,7 +238,7 @@ func TransToHttps(urlStr string, req *http.Request, host string) ([]byte, int, e
 	resp, err := httpsClient.Do(new_req)
 	if err != nil {
 		mylog.LOG.E("client do error:%s", err.Error())
-		return []byte{}, resp.StatusCode, err
+		return []byte{}, http.StatusNotFound, err
 	}
 
 	defer resp.Body.Close()
@@ -280,7 +280,7 @@ func TransToHttp(urlStr string, req *http.Request, host string) ([]byte, int, er
 	resp, err := httpClient.Do(new_req)
 	if err != nil {
 		mylog.LOG.E("client do error:%s", err.Error())
-		return []byte{}, resp.StatusCode, err
+		return []byte{}, http.StatusNotFound, err
 	}
 
 	defer resp.Body.Close()
