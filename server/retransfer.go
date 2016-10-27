@@ -9,6 +9,9 @@ import (
 	"io/ioutil"
 	"gateway/mylog"
 	"crypto/tls"
+	"io"
+	"time"
+	"net"
 )
 
 var httpClient *http.Client
@@ -19,6 +22,15 @@ func init() {
 
 	/*https默认不校验tls*/
 	tr := &http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout:   30 * time.Second,
+			KeepAlive: 30 * time.Second,
+		}).DialContext,
+		MaxIdleConns:          100,
+		IdleConnTimeout:       90 * time.Second,
+		TLSHandshakeTimeout:   10 * time.Second,
+		ExpectContinueTimeout: 1 * time.Second,
 		TLSClientConfig:    &tls.Config{InsecureSkipVerify: true},
 	}
 	httpsClient.Transport = tr
@@ -241,7 +253,11 @@ func TransToHttps(urlStr string, req *http.Request, host string) ([]byte, int, e
 		return []byte{}, http.StatusNotFound, err
 	}
 
-	defer resp.Body.Close()
+	defer func (){
+		io.Copy(ioutil.Discard,resp.Body)
+		resp.Body.Close()
+	} ()
+
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		mylog.LOG.E("ioutil.ReadAll error:%s", err.Error())
@@ -283,7 +299,10 @@ func TransToHttp(urlStr string, req *http.Request, host string) ([]byte, int, er
 		return []byte{}, http.StatusNotFound, err
 	}
 
-	defer resp.Body.Close()
+	defer func (){
+		io.Copy(ioutil.Discard,resp.Body)
+		resp.Body.Close()
+	} ()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		mylog.LOG.E("ioutil.ReadAll error:%s", err.Error())
