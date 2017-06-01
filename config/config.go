@@ -12,6 +12,8 @@ type Config struct {
 	HttpBatchAddr  []Address  `yaml:"http_batch_addr" form:"http_batch_addr"`
 	HttpsBatchAddr []Address  `yaml:"https_batch_addr" form:"https_batch_addr"`
 	ServerPort     string       `yaml:"server_port" form:"ServerPort"`
+	LogPath        string       `yaml:"log_path" form:"log_path"`
+
 }
 
 type Address struct {

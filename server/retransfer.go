@@ -9,14 +9,16 @@ import (
 	"io/ioutil"
 	"gateway/mylog"
 	"crypto/tls"
-	"io"
-	"time"
+//	"time"
+//	"net"
 	"net"
+	"time"
+	"bytes"
 )
 
 var httpClient *http.Client
 var httpsClient *http.Client
-func init() {
+func Init() {
 	httpClient = http.DefaultClient
 	httpsClient = http.DefaultClient
 
@@ -27,13 +29,27 @@ func init() {
 			Timeout:   30 * time.Second,
 			KeepAlive: 30 * time.Second,
 		}).DialContext,
-		MaxIdleConns:          100,
-		IdleConnTimeout:       90 * time.Second,
+		MaxIdleConns:          50,
+		IdleConnTimeout:       30 * time.Second,
 		TLSHandshakeTimeout:   10 * time.Second,
 		ExpectContinueTimeout: 1 * time.Second,
 		TLSClientConfig:    &tls.Config{InsecureSkipVerify: true},
 	}
+
+	tr2 := &http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout:   30 * time.Second,
+			KeepAlive: 30 * time.Second,
+		}).DialContext,
+		MaxIdleConns:          50,
+		IdleConnTimeout:       30 * time.Second,
+		TLSHandshakeTimeout:   10 * time.Second,
+		ExpectContinueTimeout: 1 * time.Second,
+	}
+
 	httpsClient.Transport = tr
+	httpClient.Transport = tr2
 
 	for _, v := range config.Settings.HttpAddr {
 		url := fmt.Sprintf("/gateway/%s", v.Suffix)
@@ -128,7 +144,6 @@ func httpHandler(w http.ResponseWriter, req *http.Request) {
 	result, statusCode, err := TransToHttp(urlStr, req, host)
 	if err != nil {
 		result = []byte{}
-		mylog.LOG.E("cloneRequest Error:%s", err.Error())
 	}
 
 	if statusCode != http.StatusOK {
@@ -254,7 +269,6 @@ func TransToHttps(urlStr string, req *http.Request, host string) ([]byte, int, e
 	}
 
 	defer func (){
-		io.Copy(ioutil.Discard,resp.Body)
 		resp.Body.Close()
 	} ()
 
@@ -281,6 +295,7 @@ func TransToHttp(urlStr string, req *http.Request, host string) ([]byte, int, er
 		return []byte{}, http.StatusNotFound, err
 	}
 
+	reqBodyCopy := copyBody(req)
 	temp := *req
 
 	new_req := &temp
@@ -292,23 +307,30 @@ func TransToHttp(urlStr string, req *http.Request, host string) ([]byte, int, er
 	}
 	new_req.RequestURI = ""            //RequestURI需要设置为空，否则会报错
 
-	mylog.LOG.I("TransToHttp New Req:%+v", new_req.Header)
+	mylog.LOG.I("[TransToHttp] %s, %+v", urlStr, new_req.Header)
 	resp, err := httpClient.Do(new_req)
 	if err != nil {
-		mylog.LOG.E("client do error:%s", err.Error())
+		mylog.LOG.E("[client-do-error] %s, %s, %s", urlStr, reqBodyCopy, err.Error())
 		return []byte{}, http.StatusNotFound, err
 	}
 
 	defer func (){
-		io.Copy(ioutil.Discard,resp.Body)
 		resp.Body.Close()
 	} ()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		mylog.LOG.E("ioutil.ReadAll error:%s", err.Error())
+		mylog.LOG.E("[resp-error] %s", err.Error())
 		return []byte{}, resp.StatusCode, err
 	}
-	mylog.LOG.I("Return response:%s %v", string(body), resp.StatusCode)
+	mylog.LOG.I("[TransToHttp-ret] %s, %s", urlStr, string(body))
 	return body, resp.StatusCode, nil
+}
+
+// Body returns the raw request body data as string.
+func copyBody(req *http.Request) string {
+	requestbody, _ := ioutil.ReadAll(req.Body)
+	bf := bytes.NewBuffer(requestbody)
+	req.Body = ioutil.NopCloser(bf)
+	return bf.String()
 }
 
